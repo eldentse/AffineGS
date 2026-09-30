@@ -138,27 +138,47 @@
 <body>
 	<br>
 	<center>
-		<span style="font-size:36px">Creative and Descriptive Paper Title</span>
+		<span style="font-size:36px">Unlocking Accurate Geometry in 3DGS via Spatially Varying Affine Rectification</span>
 		<table align=center width=600px>
 			<table align=center width=600px>
 				<tr>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">First Author</a></span>
+							<span style="font-size:24px"><a href="https://eldentse.github.io/">Tze Ho Elden Tse</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Second Author</a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=s6JKJSymFFsC&hl=en">Jizong Peng</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Third Author</a></span>
+							<span style="font-size:24px"><a href="">Richard Chen</a></span>
+						</center>
+					</td>
+					<td align=center width=160px>
+						<center>
+							<span style="font-size:24px"><a href="https://www.comp.nus.edu.sg/~ayao/">Angela Yao</a><sup>2</sup></span>
 						</center>
 					</td>
 				</tr>
 			</table>
+            <br>
+			<!-- <center>
+				<span style="font-size:20px">( *Equal contribution )
+					</span>
+			</center> -->
+			<center>
+				<span style="font-size:20px"><sup>1</sup>dConstruct Robotics, <sup>2</sup>National University of Singapore
+					</span>
+			</center>
+
+			<center>
+				<span style="font-size:20px">ICCV 2025
+					</span>
+			</center>
+
 			<table align=center width=250px>
 				<tr>
 					<td align=center width=120px>
@@ -168,7 +188,7 @@
 					</td>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href='https://github.com/richzhang/webpage-template'>[GitHub]</a></span><br>
+							<span style="font-size:24px"><a href='https://github.com/eldentse/AffineGS/tree/main'>[GitHub]</a></span><br>
 						</center>
 					</td>
 				</tr>
@@ -201,14 +221,14 @@
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				This is my abstract.
+				3D Gaussian Splatting (3DGS) has become the leading approach for photorealistic novel view synthesis, yet its underlying geometric accuracy lags behind its visual quality. Existing depth-guided methods attempt to resolve this by regularizing the optimization with monocular depth priors, typically relying on a global linear alignment. Crucially, we reveal a fundamental flaw in this assumption: modern monocular depth networks systematically exhibit region-dependent, piecewise-linear distortions. This phenomenon invalidates standard global alignment strategies, which inevitably warp scene geometry by enforcing a single scale-and-shift transform. To address this, we introduce a spatially varying affine rectification model that dynamically corrects monocular disparity into consistent metric depth using regionally smooth, edge-aware fields. We further derive a normal-aware regularizer that uses spatial gradients to couple the rectified disparity with 3DGS depth and normals. Extensive evaluations demonstrate that our sensor-free approach prevents structural collapse under extreme view sparsity and extracts highly accurate 3D meshes, effectively bridging the gap toward sensor-supervised geometric fidelity while preserving state-of-the-art photorealism.
 			</td>
 		</tr>
 	</table>
 	<br>
 
 	<hr>
-	<center><h1>Talk</h1></center>
+	<!-- <center><h1>Talk</h1></center>
 	<p align="center">
 		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
 	</p>
@@ -222,7 +242,7 @@
 			</center>
 		</tr>
 	</table>
-	<hr>
+	<hr> -->
 
 	<center><h1>Code</h1></center>
 
