@@ -380,6 +380,42 @@
 	<br>
 
 	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Method</h1></center>
+		<tr>
+			<td>
+				Instead of a single global scale-and-shift, we model the relationship between the monocular disparity <i>d</i> and the rendered 3DGS depth <i>D</i> as a <b>spatially varying affine transform</b>, 1/<i>d</i>(<i>u</i>,<i>v</i>) = &alpha;(<i>u</i>,<i>v</i>) <i>D</i>(<i>u</i>,<i>v</i>) + &beta;(<i>u</i>,<i>v</i>). The fields are recovered without any sensor depth and re-estimated at every training iteration.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<center>
+		<img style="width:1050px" src="./resources/pipeline.svg" alt="AffineGS pipeline overview"/>
+	</center>
+
+	<table align=center width=850px>
+		<tr>
+			<td>
+				<ol style="padding-left:22px; margin-top:6px">
+					<li style="margin-bottom:10px"><b>Rendering &amp; monocular prior.</b> 3DGS renders depth <i>D</i> and normals <b><i>n</i></b> for a training view, and a pre-trained Depth-Anything-V2 predicts its monocular disparity <i>d</i>.</li>
+					<li style="margin-bottom:10px"><b>Spatially varying affine rectification.</b> Because the affine fields vary much more slowly than depth within coherent regions, the gradients satisfy &minus;&nabla;<i>d</i>/<i>d</i>&sup2; &asymp; &alpha;&nabla;<i>D</i>. We solve for the local scale &alpha; from the finite-difference gradient magnitudes, recover the shift &beta;, and smooth both with an <b>edge-aware guided filter</b> that uses <i>d</i> as the guide. The fields stay smooth within surfaces and sharp across object boundaries, matching the piecewise-linear structure of the distortions.</li>
+					<li style="margin-bottom:10px"><b>Geometric supervision.</b> The rectified fields drive three losses:
+						<ul style="padding-left:20px; margin-top:6px">
+							<li><b>Gradient loss:</b> matches predicted and measured disparity gradients in magnitude and direction.</li>
+							<li><b>Normal-aware loss:</b> derives depth gradients from the rendered normals via pinhole projection, so the <i>orientations</i> of the Gaussians align with the scene's local slopes.</li>
+							<li><b>Metric re-alignment loss:</b> an L1 depth loss on the rectified depth that prevents global scale drift.</li>
+						</ul>
+					</li>
+				</ol>
+				The method changes neither the Gaussian representation nor the densification. All gains come from the supervision signal.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<hr>
 	<!-- <center><h1>Talk</h1></center>
 	<p align="center">
 		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
