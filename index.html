@@ -108,6 +108,44 @@
 		transform: translateY(-50%);
 	}
 	
+	.tldr {
+		width: 850px;
+		margin: 24px auto 0 auto;
+		text-align: center;
+		font-size: 20px;
+		line-height: 1.5;
+	}
+
+	.stats {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		width: 850px;
+		margin: 20px auto 10px auto;
+	}
+
+	.stat {
+		flex: 1;
+		background-color: #f5f7fa;
+		border: 1px solid #e3e8ee;
+		border-radius: 10px;
+		padding: 16px 12px;
+		text-align: center;
+	}
+
+	.stat-value {
+		font-size: 30px;
+		font-weight: 400;
+		color: #1367a7;
+	}
+
+	.stat-label {
+		font-size: 15px;
+		color: #555;
+		margin-top: 6px;
+		line-height: 1.4;
+	}
+
 	hr
 	{
 		border: 0;
@@ -195,6 +233,25 @@
 			</table>
 		</table>
 	</center>
+
+	<div class="tldr">
+		<b>TL;DR:</b> Monocular depth priors are distorted <i>piecewise-linearly</i>, not globally. We rectify them with spatially varying, edge-aware affine fields, which gives 3DGS accurate geometry without sensor-depth supervision.
+	</div>
+
+	<div class="stats">
+		<div class="stat">
+			<div class="stat-value">0.71 <span style="font-size:18px; color:#888">vs 0.28</span></div>
+			<div class="stat-label">Mesh F-score on MuSHRoom vs. DN-Splatter using the <i>same</i> monocular prior</div>
+		</div>
+		<div class="stat">
+			<div class="stat-value">6&times; lower</div>
+			<div class="stat-label">Depth error on MuSHRoom<br>(Abs Rel 0.055 vs. 0.354)</div>
+		</div>
+		<div class="stat">
+			<div class="stat-value">up to +4 dB</div>
+			<div class="stat-label">PSNR over the best baseline in sparse-view (2&ndash;5 views) NeRF-LLFF</div>
+		</div>
+	</div>
 
 	<center>
 		<table align=center width=850px>
