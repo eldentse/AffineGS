@@ -178,6 +178,107 @@
 		background-color: #f5f7fa;
 	}
 
+	table.results tr.ref td {
+		color: #888;
+		font-style: italic;
+	}
+
+	table.results tr.group td {
+		border-top: 1px solid #ccc;
+	}
+
+	h2 {
+		font-size: 24px;
+		font-weight: 400;
+		margin: 30px 0 10px 0;
+	}
+
+	.toggle {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin: 14px 0;
+	}
+
+	.toggle button {
+		font-family: inherit;
+		font-size: 15px;
+		padding: 6px 16px;
+		border: 1px solid #1367a7;
+		border-radius: 18px;
+		background: white;
+		color: #1367a7;
+		cursor: pointer;
+	}
+
+	.toggle button.active {
+		background: #1367a7;
+		color: white;
+	}
+
+	.tiles {
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		width: 1000px;
+		margin: 0 auto 8px auto;
+	}
+
+	.tiles figure {
+		flex: 1;
+		margin: 0;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	.tiles img {
+		width: 100%;
+		display: block;
+		border-radius: 6px;
+		margin-bottom: 6px;
+	}
+
+	.tiles figure.ours figcaption {
+		font-weight: 400;
+		color: #1367a7;
+	}
+
+	.slider-wrap {
+		position: relative;
+		width: 900px;
+		margin: 10px auto;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.slider-wrap img-comparison-slider {
+		display: block;
+		--divider-width: 3px;
+		--divider-color: white;
+	}
+
+	.slider-wrap img {
+		width: 100%;
+		display: block;
+	}
+
+	.slider-label {
+		position: absolute;
+		top: 12px;
+		padding: 4px 12px;
+		border-radius: 14px;
+		background: rgba(0, 0, 0, 0.6);
+		color: white;
+		font-size: 15px;
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.caption {
+		font-size: 16px;
+		color: #555;
+	}
+
 	hr
 	{
 		border: 0;
@@ -188,6 +289,8 @@
 
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"/>
+	<script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
 	<title>This is my paper title</title>
 	<meta property="og:image" content="Path to my teaser.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
 	<meta property="og:title" content="Creative and Descriptive Paper Title." />
@@ -414,6 +517,244 @@
 		</tr>
 	</table>
 	<br>
+
+	<hr>
+
+	<center><h1>Results</h1></center>
+
+	<!-- ===== Sparse-view NVS (NeRF-LLFF) ===== -->
+	<table align=center width=850px>
+		<tr>
+			<td>
+				<h2>Sparse-view reconstruction (NeRF-LLFF)</h2>
+				With only 2&ndash;5 training views, our rectified prior prevents structural collapse and outperforms all baselines at every view count. It closes the gap to, and in some scenes surpasses, the <i>Oracle</i>, which uses dense multi-view pseudo-ground-truth depth.
+			</td>
+		</tr>
+	</table>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<th rowspan=2 style="vertical-align:bottom">Method</th>
+				<th colspan=4>PSNR &uarr;</th>
+				<th colspan=4>SSIM &uarr;</th>
+				<th colspan=4>LPIPS &darr;</th>
+			</tr>
+			<tr>
+				<th>2</th><th>3</th><th>4</th><th>5</th>
+				<th>2</th><th>3</th><th>4</th><th>5</th>
+				<th>2</th><th>3</th><th>4</th><th>5</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>3DGS</td><td>13.31</td><td>15.13</td><td>17.37</td><td>18.68</td><td>.329</td><td>.437</td><td>.541</td><td>.601</td><td>.451</td><td>.348</td><td>.271</td><td>.226</td></tr>
+			<tr><td>DropGaussian</td><td>13.00</td><td>16.53</td><td>17.83</td><td>18.62</td><td>.386</td><td>.557</td><td>.622</td><td>.665</td><td>.444</td><td>.266</td><td>.229</td><td>.205</td></tr>
+			<tr><td>DepthSplat</td><td>13.98</td><td>16.68</td><td>17.97</td><td>18.32</td><td>.319</td><td>.391</td><td>.454</td><td>.472</td><td>.450</td><td>.383</td><td>.324</td><td>.334</td></tr>
+			<tr><td>DRGS</td><td>17.31</td><td>18.75</td><td>20.06</td><td>20.78</td><td>.475</td><td>.539</td><td>.601</td><td>.631</td><td>.324</td><td>.287</td><td>.249</td><td>.225</td></tr>
+			<tr class="highlight"><td><b>Ours</b></td><td><b>18.79</b></td><td><b>20.95</b></td><td><b>22.37</b></td><td><b>23.32</b></td><td><b>.533</b></td><td><b>.663</b></td><td><b>.721</b></td><td><b>.761</b></td><td><b>.235</b></td><td><b>.164</b></td><td><b>.134</b></td><td><b>.111</b></td></tr>
+			<tr class="ref group"><td>Oracle</td><td>19.88</td><td>21.76</td><td>22.83</td><td>23.93</td><td>.579</td><td>.670</td><td>.706</td><td>.746</td><td>.237</td><td>.177</td><td>.153</td><td>.129</td></tr>
+		</tbody>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">Mean over the Fern, Flower, Fortress and Horns scenes and 10 random view selections; columns are the number of training views. Oracle (grey) is an upper bound that uses pseudo-ground-truth depth from all images.</td>
+		</tr>
+	</table>
+
+	<div class="toggle" data-group="llff">
+		<button data-value="rgb">RGB</button>
+		<button data-value="depth" class="active">Depth</button>
+		<button data-value="normal">Normals</button>
+	</div>
+	<div class="tiles">
+		<figure><img data-group="llff" data-pattern="./resources/results/llff_3dgs_{v}.jpg" src="./resources/results/llff_3dgs_depth.jpg"/><figcaption>3DGS</figcaption></figure>
+		<figure><img data-group="llff" data-pattern="./resources/results/llff_drgs_{v}.jpg" src="./resources/results/llff_drgs_depth.jpg"/><figcaption>DRGS</figcaption></figure>
+		<figure><img data-group="llff" data-pattern="./resources/results/llff_dropgaussian_{v}.jpg" src="./resources/results/llff_dropgaussian_depth.jpg"/><figcaption>DropGaussian</figcaption></figure>
+		<figure class="ours"><img data-group="llff" data-pattern="./resources/results/llff_ours_{v}.jpg" src="./resources/results/llff_ours_depth.jpg"/><figcaption>Ours</figcaption></figure>
+	</div>
+	<br>
+
+	<!-- ===== MuSHRoom NVS + depth ===== -->
+	<table align=center width=850px>
+		<tr>
+			<td>
+				<h2>Novel-view synthesis &amp; depth (MuSHRoom)</h2>
+				Given the <i>same</i> Depth-Anything-V2 prior, globally aligned DN-Splatter (Monodepth) collapses structurally (Abs Rel 0.354). Our rectification cuts this to 0.055, compared with 0.023 for the sensor-supervised DN-Splatter, and matches DN-Splatter's photorealism.
+			</td>
+		</tr>
+	</table>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<th>Method</th>
+				<th>Sensor depth</th>
+				<th>PSNR &uarr;</th>
+				<th>SSIM &uarr;</th>
+				<th>LPIPS &darr;</th>
+				<th>Abs Rel &darr;</th>
+				<th>&delta; &lt; 1.25 &uarr;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>Splatfacto</td><td>&ndash;</td><td>24.44 / 21.33</td><td>.8486 / .7821</td><td>.1387 / .2240</td><td>.0787 / .0817</td><td>.9072 / .9061</td></tr>
+			<tr><td>2DGS</td><td>&ndash;</td><td>22.52 / 21.73</td><td>.8185 / .7898</td><td>.1773 / .1911</td><td>.0864 / .0923</td><td>.8820 / .8927</td></tr>
+			<tr><td>SuGaR</td><td>&ndash;</td><td>20.52 / 18.18</td><td>.7740 / .7125</td><td>.2427 / .2959</td><td>.1213 / .1174</td><td>.8412 / .8564</td></tr>
+			<tr><td>DN-Splatter (Monodepth)</td><td>&ndash;</td><td>19.26 / 17.24</td><td>.7255 / .6845</td><td>.3338 / .3851</td><td>.3542 / .3669</td><td>.5682 / .5818</td></tr>
+			<tr class="highlight"><td><b>Ours</b></td><td>&ndash;</td><td><b>24.49 / 22.07</b></td><td><b>.8570 / .7920</b></td><td><b>.1288 / .1733</b></td><td><b>.0551 / .0490</b></td><td><b>.9674 / .9729</b></td></tr>
+			<tr class="ref group"><td>DN-Splatter</td><td>&check;</td><td>24.58 / 21.89</td><td>.8558 / .7984</td><td>.1293 / .1797</td><td>.0228 / .0354</td><td>.9854 / .9683</td></tr>
+		</tbody>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">Explicit (Gaussian-based) methods, averaged over 6 scenes. Each cell shows the within-trajectory / disjoint-trajectory test split. Bold marks the best method without sensor depth. The sensor-supervised DN-Splatter (grey) is shown for reference.</td>
+		</tr>
+	</table>
+
+	<div class="toggle" data-group="mushroom">
+		<button data-value="rgb">RGB</button>
+		<button data-value="normal" class="active">Normals</button>
+		<button data-value="depth">Depth</button>
+	</div>
+	<div class="tiles" style="width:900px">
+		<figure><img data-group="mushroom" data-pattern="./resources/results/mushroom_dnsplatter_mono_{v}.jpg" src="./resources/results/mushroom_dnsplatter_mono_normal.jpg"/><figcaption>DN-Splatter (Monodepth)</figcaption></figure>
+		<figure><img data-group="mushroom" data-pattern="./resources/results/mushroom_dnsplatter_{v}.jpg" src="./resources/results/mushroom_dnsplatter_normal.jpg"/><figcaption>DN-Splatter (sensor depth)</figcaption></figure>
+		<figure class="ours"><img data-group="mushroom" data-pattern="./resources/results/mushroom_ours_{v}.jpg" src="./resources/results/mushroom_ours_normal.jpg"/><figcaption>Ours</figcaption></figure>
+	</div>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">The globally aligned baseline warps the geometry. By rectifying the same monocular prior, our method recovers crisp planar surfaces and sharp object boundaries, better than DN-Splatter even with sensor depth.</td>
+		</tr>
+	</table>
+	<br>
+
+	<div class="toggle" data-group="scannetpp">
+		<button data-value="s1" class="active">ScanNet++ scene 1</button>
+		<button data-value="s2">ScanNet++ scene 2</button>
+	</div>
+	<div class="tiles">
+		<figure><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_dnsplatter_rgb.jpg" src="./resources/results/scannetpp_s1_dnsplatter_rgb.jpg"/><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_dnsplatter_depth.jpg" src="./resources/results/scannetpp_s1_dnsplatter_depth.jpg"/><figcaption>DN-Splatter</figcaption></figure>
+		<figure class="ours"><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_ours_rgb.jpg" src="./resources/results/scannetpp_s1_ours_rgb.jpg"/><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_ours_depth.jpg" src="./resources/results/scannetpp_s1_ours_depth.jpg"/><figcaption>Ours</figcaption></figure>
+		<figure><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_gt_rgb.jpg" src="./resources/results/scannetpp_s1_gt_rgb.jpg"/><img data-group="scannetpp" data-pattern="./resources/results/scannetpp_{v}_gt_depth.jpg" src="./resources/results/scannetpp_s1_gt_depth.jpg"/><figcaption>Ground truth</figcaption></figure>
+	</div>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">Rendered RGB (top) and depth (bottom) on ScanNet++. The red boxes highlight sharper depth along furniture boundaries and complex geometry.</td>
+		</tr>
+	</table>
+	<br>
+
+	<!-- ===== Mesh quality ===== -->
+	<table align=center width=850px>
+		<tr>
+			<td>
+				<h2>Mesh reconstruction (MuSHRoom &amp; ScanNet++)</h2>
+				Without sensor depth, DN-Splatter's meshes degrade badly (F-score 0.28 on MuSHRoom). With the same monocular prior, our method reaches 0.71 and is the best sensor-free explicit method on both datasets, ahead of dedicated meshing methods such as SuGaR and 2DGS.
+			</td>
+		</tr>
+	</table>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<th rowspan=2 style="vertical-align:bottom">Method</th>
+				<th rowspan=2 style="vertical-align:bottom">Sensor depth</th>
+				<th colspan=3>MuSHRoom</th>
+				<th colspan=3>ScanNet++</th>
+			</tr>
+			<tr>
+				<th>Chamfer-L1 &darr;</th><th>Normal C. &uarr;</th><th>F-score &uarr;</th>
+				<th>Chamfer-L1 &darr;</th><th>Normal C. &uarr;</th><th>F-score &uarr;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>Splatfacto</td><td>&ndash;</td><td>.0652</td><td>.7727</td><td>.5835</td><td>.1719</td><td>.6741</td><td>.1790</td></tr>
+			<tr><td>2DGS</td><td>&ndash;</td><td>.0687</td><td>.8008</td><td>.6039</td><td>.1035</td><td>.7799</td><td>.4196</td></tr>
+			<tr><td>SuGaR</td><td>&ndash;</td><td>.0620</td><td>.8031</td><td>.6378</td><td>.0975</td><td>.7241</td><td>.4367</td></tr>
+			<tr><td>DN-Splatter (Monodepth)</td><td>&ndash;</td><td>.2605</td><td>.6415</td><td>.2765</td><td>.1975</td><td>.7378</td><td>.1395</td></tr>
+			<tr class="highlight"><td><b>Ours</b></td><td>&ndash;</td><td><b>.0486</b></td><td><b>.8662</b></td><td><b>.7097</b></td><td><b>.0707</b></td><td><b>.8747</b></td><td><b>.4765</b></td></tr>
+			<tr class="ref group"><td>DN-Splatter</td><td>&check;</td><td>.0216</td><td>.8822</td><td>.9243</td><td>.0667</td><td>.8316</td><td>.7658</td></tr>
+		</tbody>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">Explicit methods; F-score at a 5&nbsp;cm threshold. Bold marks the best method without sensor depth. The sensor-supervised DN-Splatter (grey) is shown as an upper bound.</td>
+		</tr>
+	</table>
+
+	<div class="slider-wrap">
+		<span class="slider-label" style="left:12px">DN-Splatter</span>
+		<span class="slider-label" style="right:12px">Ours</span>
+		<img-comparison-slider>
+			<img slot="first" src="./resources/results/mesh_dnsplatter.jpg" alt="DN-Splatter mesh"/>
+			<img slot="second" src="./resources/results/mesh_ours.jpg" alt="Our mesh"/>
+		</img-comparison-slider>
+	</div>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption" style="text-align:center">Drag the slider to compare extracted meshes on ScanNet++.</td>
+		</tr>
+	</table>
+	<center>
+		<figure style="width:450px; margin:14px auto">
+			<img class="rounded" style="width:450px" src="./resources/results/mesh_gt.jpg" alt="Ground-truth mesh"/>
+			<figcaption class="caption">Ground-truth mesh. Our method also recovers the window geometry, which is missing from the ground truth.</figcaption>
+		</figure>
+	</center>
+	<br>
+
+	<!-- ===== Ablation ===== -->
+	<table align=center width=850px>
+		<tr>
+			<td>
+				<h2>Ablation</h2>
+				Each loss contributes to the result. <i>L</i><sub>depth</sub> anchors the global scale, <i>L</i><sub>normal</sub> keeps surfaces smooth, and <i>L</i><sub>grad</sub> ties disparity gradients to physical structure. Together, they trade a small PSNR drop for the best geometric accuracy.
+			</td>
+		</tr>
+	</table>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<th rowspan=2 style="vertical-align:bottom">Method</th>
+				<th colspan=2>Photometry</th>
+				<th colspan=3>Geometry</th>
+			</tr>
+			<tr>
+				<th>PSNR &uarr;</th><th>LPIPS &darr;</th>
+				<th>Abs Rel &darr;</th><th>Accuracy &darr;</th><th>F-score &uarr;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>Splatfacto (baseline)</td><td>25.293</td><td>0.086</td><td>0.059</td><td>0.043</td><td>0.728</td></tr>
+			<tr><td>+ <i>L</i><sub>grad</sub></td><td>24.322</td><td>0.123</td><td>0.085</td><td>0.054</td><td>0.673</td></tr>
+			<tr><td>+ <i>L</i><sub>normal</sub></td><td>25.256</td><td>0.085</td><td>0.064</td><td>0.042</td><td>0.728</td></tr>
+			<tr><td>+ <i>L</i><sub>depth</sub></td><td>24.561</td><td>0.098</td><td>0.043</td><td>0.030</td><td>0.798</td></tr>
+			<tr><td>+ <i>L</i><sub>grad</sub> + <i>L</i><sub>normal</sub></td><td>24.553</td><td>0.116</td><td>0.075</td><td>0.051</td><td>0.707</td></tr>
+			<tr><td>+ <i>L</i><sub>grad</sub> + <i>L</i><sub>depth</sub></td><td>25.012</td><td>0.101</td><td>0.041</td><td>0.026</td><td>0.850</td></tr>
+			<tr><td>+ <i>L</i><sub>normal</sub> + <i>L</i><sub>depth</sub></td><td>25.418</td><td>0.084</td><td><b>0.040</b></td><td>0.028</td><td>0.813</td></tr>
+			<tr class="highlight"><td><b>All (Ours)</b></td><td>24.947</td><td>0.102</td><td><b>0.040</b></td><td><b>0.025</b></td><td><b>0.855</b></td></tr>
+		</tbody>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td class="caption">Evaluated on the coffee_room scene of MuSHRoom. Bold marks the best geometric results.</td>
+		</tr>
+	</table>
+	<br>
+
+	<script>
+		document.querySelectorAll('.toggle').forEach(function (group) {
+			group.addEventListener('click', function (e) {
+				var btn = e.target.closest('button');
+				if (!btn) return;
+				group.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b === btn); });
+				document.querySelectorAll('img[data-group="' + group.dataset.group + '"]').forEach(function (img) {
+					img.src = img.dataset.pattern.replace('{v}', btn.dataset.value);
+				});
+			});
+		});
+	</script>
 
 	<hr>
 	<!-- <center><h1>Talk</h1></center>
