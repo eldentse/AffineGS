@@ -146,6 +146,38 @@
 		line-height: 1.4;
 	}
 
+	table.results {
+		border-collapse: collapse;
+		margin: 10px auto;
+		font-size: 16px;
+	}
+
+	table.results th, table.results td {
+		padding: 6px 16px;
+		text-align: center;
+	}
+
+	table.results thead tr:first-child th {
+		border-top: 2px solid #333;
+	}
+
+	table.results thead tr:last-child th {
+		border-bottom: 1px solid #333;
+		font-weight: 400;
+	}
+
+	table.results tbody tr:last-child td {
+		border-bottom: 2px solid #333;
+	}
+
+	table.results td:first-child, table.results th:first-child {
+		text-align: left;
+	}
+
+	table.results tr.highlight td {
+		background-color: #f5f7fa;
+	}
+
 	hr
 	{
 		border: 0;
@@ -280,6 +312,68 @@
 		<tr>
 			<td>
 				3D Gaussian Splatting (3DGS) has become the leading approach for photorealistic novel view synthesis, yet its underlying geometric accuracy lags behind its visual quality. Existing depth-guided methods attempt to resolve this by regularizing the optimization with monocular depth priors, typically relying on a global linear alignment. Crucially, we reveal a fundamental flaw in this assumption: modern monocular depth networks systematically exhibit region-dependent, piecewise-linear distortions. This phenomenon invalidates standard global alignment strategies, which inevitably warp scene geometry by enforcing a single scale-and-shift transform. To address this, we introduce a spatially varying affine rectification model that dynamically corrects monocular disparity into consistent metric depth using regionally smooth, edge-aware fields. We further derive a normal-aware regularizer that uses spatial gradients to couple the rectified disparity with 3DGS depth and normals. Extensive evaluations demonstrate that our sensor-free approach prevents structural collapse under extreme view sparsity and extracts highly accurate 3D meshes, effectively bridging the gap toward sensor-supervised geometric fidelity while preserving state-of-the-art photorealism.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Key Observation</h1></center>
+		<tr>
+			<td>
+				Depth-guided 3DGS methods usually assume that monocular disparity can be aligned to metric depth with a <b>single global scale-and-shift</b>. We find that this assumption breaks down: modern monocular depth models (Depth-Anything-V2, MoGe, Metric3D-V2) show <b>region-dependent, piecewise-linear distortions</b>. The predicted disparity splits into distinct regions, with breaks along object boundaries and depth discontinuities, and each region follows its own linear relationship to the true depth.
+			</td>
+		</tr>
+	</table>
+
+	<table class="results">
+		<thead>
+			<tr>
+				<th rowspan=2 style="vertical-align:bottom">Alignment Strategy</th>
+				<th colspan=2>MuSHRoom</th>
+				<th colspan=2>ScanNet++</th>
+			</tr>
+			<tr>
+				<th>Inlier Ratio &uarr;</th>
+				<th>RMSE &darr;</th>
+				<th>Inlier Ratio &uarr;</th>
+				<th>RMSE &darr;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Global Affine (<i>K</i> = 1)</td>
+				<td>58.9%</td><td>0.074</td><td>58.6%</td><td>0.088</td>
+			</tr>
+			<tr>
+				<td>Piecewise Local (<i>K</i> = 3)</td>
+				<td>84.9%</td><td>0.046</td><td>84.6%</td><td>0.056</td>
+			</tr>
+			<tr class="highlight">
+				<td>Piecewise Local (<i>K</i> = 5)</td>
+				<td><b>92.7%</b></td><td><b>0.030</b></td><td><b>91.8%</b></td><td><b>0.039</b></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table align=center width=850px>
+		<tr>
+			<td style="font-size:16px; color:#555">
+				Depth-Anything-V2 prior, evaluated at a 0.02 residual threshold. A single global transform leaves over 40% of the scene misaligned. Splitting the image into just 3&ndash;5 local linear regions raises the inlier ratio above 84% and 91% and roughly halves the RMSE.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<center>
+		<img class="rounded" style="width:850px" src="./resources/teaser_extension_4_scenes.jpg"/>
+	</center>
+	<table align=center width=850px>
+		<tr>
+			<td>
+				Across diverse indoor scenes, the monocular disparity consistently fractures into spatially coherent affine regimes (red, orange and grey). The scatter plots show that one global scale-and-shift (<i>K</i> = 1) cannot fit these incompatible linear clusters: it either averages the error across all of them or fits the dominant region and warps the rest. <b>Our method instead estimates spatially varying, edge-aware affine fields that rectify each region locally.</b>
 			</td>
 		</tr>
 	</table>
