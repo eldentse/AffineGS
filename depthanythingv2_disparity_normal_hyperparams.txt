@@ -1,0 +1,44 @@
+Depth Anything V2 — RGB + Disparity Normal Gradient + L1 Depth Loss
+
+All selected runs:
+  disparity_depth_loss_lambda: 0.1
+  disparity_render_normal_loss_lambda: 0.08
+  l1_weight: 0.4
+
+Per-scene guided-filter hyperparameters
+----------------------------------------
+coffee_room
+  run:    kernel_600_eps_0.08_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 600
+  eps:    0.08
+
+computer
+  run:    kernel_600_eps_0.5_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 600
+  eps:    0.5
+
+honka
+  run:    kernel_600_eps_0.1_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 600
+  eps:    0.1
+
+kokko
+  run:    kernel_550_eps_0.4_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 550
+  eps:    0.4
+
+sauna
+  run:    kernel_550_eps_0.3_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 550
+  eps:    0.3
+
+vr_room
+  run:    kernel_650_eps_0.2_render_normal_weight_0.08
+  lambda: 0.1
+  radius: 650
+  eps:    0.2
