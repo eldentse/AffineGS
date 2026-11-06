@@ -1,6 +1,6 @@
 # AffineGS: Unlocking Accurate Geometry in 3DGS via Spatially Varying Affine Rectification
 
-**NeurIPS 2026** · [Project page](https://eldentse.github.io/AffineGS/)
+**NeurIPS 2026** · [Paper (arXiv)](https://arxiv.org/abs/2611.07709) · [Project page](https://eldentse.github.io/AffineGS/)
 
 Tze Ho Elden Tse\*, Jizong Peng\*, Richard Chen, Angela Yao
 
@@ -316,3 +316,14 @@ Two-scene averages, with TSDF meshes:
 | DN-Splatter, our reproduction (RTX 3090) | 0.109 | 0.029 | 0.069 | 0.838 | 0.813 |
 
 Per scene, AffineGS reaches Chamfer-L1 0.057 and F-score 0.462 on `8b5caf3398`, but only 0.156 and 0.180 on `b20a261fdf`. On `b20a261fdf`, every run we tried without sensor depth, including plain 3DGS with no geometry losses, renders depth about 5% too short, which costs a lot under the 5 cm F-score threshold. DN-Splatter, which trains on the sensor depth, does not have this problem.
+
+## Citation
+
+```bibtex
+@inproceedings{tse2026affinegs,
+  title={AffineGS: Unlocking Accurate Geometry in {3DGS} via Spatially Varying Affine Rectification},
+  author={Tse, Tze Ho Elden and Peng, Jizong and Chen, Richard and Yao, Angela},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2026}
+}
+```
