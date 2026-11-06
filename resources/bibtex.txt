@@ -1,6 +1,6 @@
-@inproceedings{author20XXtitle,
-  title={Please cite me},
-  author={Author, First and Author, Second and Author, Third},
-  booktitle={Conference},
-  year={20XX}
+@inproceedings{tse2026affinegs,
+  title={AffineGS: Unlocking Accurate Geometry in {3DGS} via Spatially Varying Affine Rectification},
+  author={Tse, Tze Ho Elden and Peng, Jizong and Chen, Richard and Yao, Angela},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2026}
 }
